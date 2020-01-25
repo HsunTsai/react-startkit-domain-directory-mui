@@ -1,5 +1,5 @@
 import app from './appReducer';
-import home from './home/homeReducer';
+import home from './pages/home/homeReducer';
 // ex. import newReducer from './newReducer'
 
 const combineReducer = reducers => {

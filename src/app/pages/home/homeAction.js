@@ -1,4 +1,4 @@
-import { openNotificationWithIcon } from '../utils/notification';
+import { openNotificationWithIcon } from '../../utils/notification';
 
 export const COUNT_CHANGE = 'COUNT_CHANGE';
 

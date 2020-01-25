@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'antd';
 import classNames from 'classnames';
-import { ReducerContext } from '../ReduxIntlProvider';
+import { ReducerContext } from '../../ReduxIntlProvider';
 import { countUp, countDown } from './homeAction';
 
 const Home = () => {

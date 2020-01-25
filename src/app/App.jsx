@@ -11,9 +11,9 @@ import {
 import services from './config/services';
 import Header from './common/components/Header';
 
-import HomeComponent from './home/Home';
-import AboutComponent from './about/About';
-import TopicsComponent from './topic/Topics';
+import HomeComponent from './pages/home/Home';
+import AboutComponent from './pages/about/About';
+import TopicsComponent from './pages/topic/Topics';
 
 const App = () => {
 	const pages = [
