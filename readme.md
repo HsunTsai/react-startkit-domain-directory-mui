@@ -1,8 +1,6 @@
 # React Start Kit
 A React Start Kit with
-Domain Directory Structure
-Airbnb eslint
-Webpack
+Domain Directory Structure & Airbnb eslint & Webpack
 
 
 ## How to satrt
