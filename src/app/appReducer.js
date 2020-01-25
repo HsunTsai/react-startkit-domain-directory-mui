@@ -1,4 +1,4 @@
-import { FETCH_LOCALE_SUCCESS, FETCH_LOCALE_FAILED } from '../actions/app';
+import { FETCH_LOCALE_SUCCESS, FETCH_LOCALE_FAILED } from './appAction';
 
 const INITIAL_STATE = {
 	language: {

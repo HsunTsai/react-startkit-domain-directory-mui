@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'antd';
 import classNames from 'classnames';
+import { ReducerContext } from '../ReduxIntlProvider';
+import { countUp, countDown } from './homeAction';
 
 const Home = () => {
+	const [state, dispatch] = useContext(ReducerContext);
+	const { count } = state.home;
+
 	const [active, setActive] = useState(false);
 
 	return (
@@ -26,6 +31,17 @@ const Home = () => {
 			>
 				{`Home Title ${active ? 'inActive' : 'Active'}`}
 			</Button>
+
+			<br />
+			<div>{`Now Count ==> ${count}`}</div>
+			<div>
+				<Button onClick={() => countUp(dispatch, count)}>
+					Count Up
+				</Button>
+				<Button onClick={() => countDown(dispatch, count)}>
+					Count Down
+				</Button>
+			</div>
 		</div>
 	);
 };

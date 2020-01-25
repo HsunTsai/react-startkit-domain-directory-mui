@@ -3,10 +3,10 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import zh from 'react-intl/locale-data/zh';
 
-import { changeLang } from './actions/app';
+import { changeLang } from './appAction';
 
 // 將 combineReducer 後的 Reducer import
-import reducers from './reducers/index';
+import reducers from './combineReducer';
 
 addLocaleData([...en, ...zh]);
 

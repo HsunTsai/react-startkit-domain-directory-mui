@@ -1,5 +1,5 @@
 import axios from 'axios';
-import services from '../config/services';
+import services from './config/services';
 
 export const FETCH_LOCALE_SUCCESS = 'FETCH_LOCALE_SUCCESS';
 export const FETCH_LOCALE_FAILED = 'FETCH_LOCALE_FAILED';

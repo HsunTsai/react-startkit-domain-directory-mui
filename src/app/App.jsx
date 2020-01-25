@@ -9,11 +9,11 @@ import {
 // import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 
 import services from './config/services';
-import Header from './components/Header';
+import Header from './common/components/Header';
 
-import HomeComponent from './containers/Home';
-import AboutComponent from './containers/About';
-import TopicsComponent from './containers/Topics';
+import HomeComponent from './home/Home';
+import AboutComponent from './about/About';
+import TopicsComponent from './topic/Topics';
 
 const App = () => {
 	const pages = [

@@ -1,5 +1,5 @@
-import app from './app';
-// import topic from './topic';
+import app from './appReducer';
+import home from './home/homeReducer';
 // ex. import newReducer from './newReducer'
 
 const combineReducer = reducers => {
@@ -28,7 +28,7 @@ const combineReducer = reducers => {
 // 將要用的reducer都放入下方object
 const reducers = combineReducer({
 	app,
-	// topic,
+	home,
 });
 
 export default reducers;
