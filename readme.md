@@ -1,5 +1,9 @@
 # React Start Kit
-A React Start Kit with webpack
+A React Start Kit with
+Domain Directory Structure
+Airbnb eslint
+Webpack
+
 
 ## How to satrt
 ```xml
