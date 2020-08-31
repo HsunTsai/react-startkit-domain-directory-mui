@@ -16,7 +16,7 @@ const plugins = [
 	],
 ];
 
-module.exports = (api) => {
+module.exports = api => {
 	if (api.env('test')) {
 		presets.push('@babel/preset-env');
 		// test

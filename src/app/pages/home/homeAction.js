@@ -9,11 +9,7 @@ export const countUp = (dispatch, count) => {
 			payload: { count: count + 1 },
 		});
 	} else {
-		openNotificationWithIcon(
-			'error',
-			'Stop',
-			'Count can not bigger than 5'
-		);
+		openNotificationWithIcon('error', 'Stop', 'Count can not bigger than 5');
 	}
 };
 
@@ -24,10 +20,6 @@ export const countDown = (dispatch, count) => {
 			payload: { count: count - 1 },
 		});
 	} else {
-		openNotificationWithIcon(
-			'error',
-			'Stop',
-			'Count can not smaller than 0'
-		);
+		openNotificationWithIcon('error', 'Stop', 'Count can not smaller than 0');
 	}
 };

@@ -20,27 +20,16 @@ const Home = () => {
 			>
 				Home Page
 			</div>
-			<FormattedMessage
-				id="superHello"
-				values={{ someoneName: 'Hsun.Tsai' }}
-			/>
-			<Button
-				className="home__btn"
-				type="primary"
-				onClick={() => setActive(!active)}
-			>
+			<FormattedMessage id="superHello" values={{ someoneName: 'Hsun.Tsai' }} />
+			<Button className="home__btn" type="primary" onClick={() => setActive(!active)}>
 				{`Home Title ${active ? 'inActive' : 'Active'}`}
 			</Button>
 
 			<br />
 			<div>{`Now Count ==> ${count}`}</div>
 			<div>
-				<Button onClick={() => countUp(dispatch, count)}>
-					Count Up
-				</Button>
-				<Button onClick={() => countDown(dispatch, count)}>
-					Count Down
-				</Button>
+				<Button onClick={() => countUp(dispatch, count)}>Count Up</Button>
+				<Button onClick={() => countDown(dispatch, count)}>Count Down</Button>
 			</div>
 		</div>
 	);

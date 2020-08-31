@@ -1,11 +1,6 @@
 import { notification } from 'antd';
 
-export const openNotificationWithIcon = (
-	type,
-	message,
-	description,
-	duration = 4
-) => {
+export const openNotificationWithIcon = (type, message, description, duration = 4) => {
 	notification.config({
 		placement: 'bottomLeft',
 		duration,
