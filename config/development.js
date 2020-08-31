@@ -1,20 +1,21 @@
 const baseConfig = require('./base.js');
-const webpackMerge = require('webpack-merge');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const webpack = require('webpack');
+const { merge } = require('webpack-merge');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 const package = require('../package.json');
 
 const contextRoot = '/',
 	domain = '/(!!!Your back-end path on server)';
 
-module.exports = function(env = 'development') {
-	const config = webpackMerge(baseConfig(env), {
+module.exports = (env = 'development') => {
+	const config = merge(baseConfig(env), {
 		entry: {
-			polyfill: 'babel-polyfill',
 			hotLoader: 'react-hot-loader/patch',
 			main: './src/index.jsx',
 		},
+		devtool: 'cheap-module-eval-source-map',
 		output: {
 			publicPath: contextRoot,
 		},
@@ -26,17 +27,18 @@ module.exports = function(env = 'development') {
 			headers: {
 				'Access-Control-Allow-Origin': '*',
 			},
-			proxy: {
-				'/(!!!Your API Path)': {
+			proxy: [
+				{
+					context: ['/(!!!Your API Path)'],
 					target: '(!!!Your API server hostname)', //ex: http://www.hsunserver.ga/
 					changeOrigin: true,
 					secure: false,
 					cookieDomainRewrite: '',
 				},
-			},
+			],
 			hot: true,
 		},
-		devtool: 'cheap-module-eval-source-map',
+
 		module: {
 			rules: [
 				{
@@ -44,34 +46,19 @@ module.exports = function(env = 'development') {
 					use: [
 						{
 							loader: 'style-loader',
-							options: {
-								sourceMap: true,
-							},
+							options: { sourceMap: true },
 						},
-						{
-							loader: 'css-loader',
-							options: {
-								sourceMap: true,
-							},
-						},
+						{ loader: 'css-loader', options: { sourceMap: true } },
 						{
 							loader: 'postcss-loader',
-							options: {
-								sourceMap: true,
-							},
+							options: { sourceMap: true },
 						},
 						{
 							loader: 'sass-loader',
-							options: {
-								sourceMap: true,
-							},
+							options: { implementation: require('sass') },
 						},
 					],
 				},
-				// {
-				// 	test: /\.(png|jpe?g|gif)(\?.*)?$/,
-				// 	loader: 'url-loader',
-				// },
 			],
 		},
 		resolve: {

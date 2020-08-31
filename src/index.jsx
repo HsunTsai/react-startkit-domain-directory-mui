@@ -1,5 +1,6 @@
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
 // css
-import './scss/normalize.css';
 import './scss/index.scss';
 import ReactDOM from 'react-dom';
 import React from 'react';

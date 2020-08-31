@@ -2,29 +2,38 @@
 
 const presets = ['@babel/preset-react'];
 const plugins = [
-  'react-hot-loader/babel',
-  '@babel/plugin-proposal-class-properties',
-  '@babel/plugin-syntax-dynamic-import',
+	'react-hot-loader/babel',
+	'@babel/plugin-proposal-class-properties',
+	'@babel/plugin-syntax-dynamic-import',
+	[
+		'transform-imports',
+		{
+			// antd: {
+			// 	transform: 'antd/lib/${member}',
+			// 	preventFullImport: true,
+			// },
+		},
+	],
 ];
 
-module.exports = function (api) {
-  if (api.env('test')) {
-    presets.push('@babel/preset-env');
-    // test
-  } else {
-    // development
-    presets.push([
-      '@babel/preset-env',
-      {
-        modules: false,
-        targets: {
-          browsers: ['> 1%', 'last 2 versions', 'not ie <= 8'],
-        },
-      },
-    ]);
-  }
-  return {
-    presets,
-    plugins,
-  };
+module.exports = (api) => {
+	if (api.env('test')) {
+		presets.push('@babel/preset-env');
+		// test
+	} else {
+		// development
+		presets.push([
+			'@babel/preset-env',
+			{
+				modules: false,
+				targets: {
+					browsers: ['> 1%', 'last 2 versions', 'not ie <= 8'],
+				},
+			},
+		]);
+	}
+	return {
+		presets,
+		plugins,
+	};
 };
