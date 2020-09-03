@@ -8,9 +8,9 @@ Domain Directory Structure & Airbnb eslint & Webpack
 1.Clone this project
 2.Install node js (https://nodejs.org/en/)
 3.Install yarn (https://classic.yarnpkg.com/)
-3.Command line(in project folder) => yarn install
-4.Command line(in project folder) => npm run start
-5.Enjoy coding
+4.Command line(in project folder) => yarn install
+5.Command line(in project folder) => npm run start
+6.Enjoy coding
 ```
 
 ## How to setup your backend Server
