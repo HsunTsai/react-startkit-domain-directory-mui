@@ -7,7 +7,8 @@ Domain Directory Structure & Airbnb eslint & Webpack
 ```xml
 1.Clone this project
 2.Install node js (https://nodejs.org/en/)
-3.Command line(in project folder) => npm run project-init
+3.Install yarn (https://classic.yarnpkg.com/)
+3.Command line(in project folder) => yarn install
 4.Command line(in project folder) => npm run start
 5.Enjoy coding
 ```
