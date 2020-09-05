@@ -23,8 +23,6 @@ const ReduxIntlProvider = ({ children }) => {
 	const { language } = state.app;
 	useEffect(() => {
 		/* 將瀏覽器預設語系帶入 */
-		console.log('navigator.languages', navigator.languages);
-		console.log('navigator.userLanguage', navigator.userLanguage);
 		let lang = navigator.languages ? navigator.languages[0] : navigator.language || navigator.userLanguage;
 		lang = lang.toLowerCase();
 		changeLang(lang, dispatch);
