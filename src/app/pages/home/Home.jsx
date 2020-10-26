@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import { ReducerContext } from '../../ReduxIntlProvider';
 import { countUp, countDown } from './homeAction';
 
+import './home.scss';
+
 const Home = () => {
 	const [state, dispatch] = useContext(ReducerContext);
 	const { count } = state.home;

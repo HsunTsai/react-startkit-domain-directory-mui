@@ -1,6 +1,8 @@
 import React from 'react';
 import { Avatar } from 'antd';
 
+import './about.scss';
+
 const About = () => (
 	<div className="about">
 		<div className="about__title">About Page</div>

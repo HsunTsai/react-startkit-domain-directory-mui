@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Checkbox, DatePicker } from 'antd';
 
+import './topic.scss';
+
 const { RangePicker } = DatePicker;
 
 const options = [
@@ -9,7 +11,7 @@ const options = [
 	{ label: '飛起來', value: 'Fly' },
 ];
 
-const Topics = () => {
+const Topic = () => {
 	const [clickOption, setClickOption] = useState(['Click']);
 	const [selectDate, setSelectDate] = useState('Empty');
 
@@ -28,4 +30,4 @@ const Topics = () => {
 	);
 };
 
-export default Topics;
+export default Topic;

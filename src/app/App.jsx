@@ -23,7 +23,7 @@ const pages = [
 	{
 		path: '/topic',
 		name: 'Topic',
-		component: Loadable({ loader: () => import('./pages/topic/Topics'), loading: RouterLoading }),
+		component: Loadable({ loader: () => import('./pages/topic/Topic'), loading: RouterLoading }),
 	},
 ];
 
