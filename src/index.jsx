@@ -5,16 +5,16 @@ import './scss/index.scss';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
-import ReduxIntlProvider from './app/ReduxIntlProvider';
+import CustomProvider from './IndexProvider';
 import App from './app/App';
 
 const render = Component => {
 	ReactDOM.render(
-		<ReduxIntlProvider>
+		<CustomProvider>
 			<AppContainer>
 				<Component />
 			</AppContainer>
-		</ReduxIntlProvider>,
+		</CustomProvider>,
 		document.getElementById('app')
 	);
 };

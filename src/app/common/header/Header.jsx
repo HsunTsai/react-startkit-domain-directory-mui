@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Select } from 'antd';
-import { ReducerContext } from '../../ReduxIntlProvider';
 import { changeLang } from '../../appAction';
+import { ReducerContext } from '../../../IndexProvider';
 
 import ReactIcon from '../../../images/react_logo.png';
 

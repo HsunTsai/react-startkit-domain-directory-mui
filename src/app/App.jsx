@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import Loadable from 'react-loadable';
 
 import services from './config/services';
-import Header from './common/components/Header';
-import RouterLoading from './common/components/loading/Loading';
+import Header from './common/header/Header';
+import RouterLoading from './common/loading/Loading';
 
 const pages = [
 	{
