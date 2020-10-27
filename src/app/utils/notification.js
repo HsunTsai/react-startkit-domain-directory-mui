@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { notification } from 'antd';
 
 export const openNotificationWithIcon = (type, message, description, duration = 4) => {
@@ -18,6 +19,8 @@ export const openNotificationError = (type, message, error) => {
 		duration: 4,
 	});
 
+	const { statusText } = error.response;
+
 	notification[type]({
 		message,
 		description:
@@ -25,8 +28,6 @@ export const openNotificationError = (type, message, error) => {
 				? error.response.data // 檢查data是否存在
 					? error.response.data.message // 檢查message是否存在
 						? error.response.data.message
-						: statusText
-						? statusText
 						: statusText
 					: statusText
 				: JSON.stringify(error.response),
