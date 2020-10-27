@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Checkbox, DatePicker } from 'antd';
+import PropTypes from 'prop-types';
+import { Button, Checkbox, DatePicker } from 'antd';
 
 import './topic.scss';
 
@@ -11,7 +12,7 @@ const options = [
 	{ label: '飛起來', value: 'Fly' },
 ];
 
-const Topic = () => {
+const Topic = ({ history }) => {
 	const [clickOption, setClickOption] = useState(['Click']);
 	const [selectDate, setSelectDate] = useState('Empty');
 
@@ -26,8 +27,17 @@ const Topic = () => {
 			<div className="topic__block">
 				<RangePicker onChange={dateString => setSelectDate(JSON.stringify(dateString))} />
 			</div>
+			<div className="topic__block">
+				<Button type="primary" onClick={() => history.push(`./about`)}>
+					Go to About Page
+				</Button>
+			</div>
 		</div>
 	);
+};
+
+Topic.propTypes = {
+	history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default Topic;

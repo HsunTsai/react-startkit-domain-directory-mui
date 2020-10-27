@@ -1,35 +1,27 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteMatch, useHistory } from 'react-router-dom';
 import { Select } from 'antd';
-import { changeLang } from '../../appAction';
-import { ReducerContext } from '../../../IndexProvider';
+import { changeLang, checkLanguageSupport, supportLanguages } from '../../appAction';
 
 import ReactIcon from '../../../images/react_logo.png';
-
-const languageOptions = [
-	{ value: 'en', label: 'English' },
-	{ value: 'zh-tw', label: '繁體中文' },
-	{ value: 'zh-cn', label: '簡體中文' },
-];
 
 const { Option } = Select;
 
 const Header = ({ pages }) => {
-	const [state, dispatch] = useContext(ReducerContext);
+	const history = useHistory();
 	const {
-		language: { locale },
-	} = state.app;
+		url,
+		params: { locale },
+	} = useRouteMatch();
 
-	/* 檢查與係是否存在於清單 */
-	const isLanguageExist = languageOptions.some(({ value }) => value === locale);
 	return (
 		<div className="app__header">
 			<img alt="" className="app__header-icon" src={ReactIcon} />
 			{pages.map(page => (
 				<NavLink
 					key={page.path}
-					to={page.path}
+					to={`${url}${page.path}`}
 					className="app__header-item"
 					activeClassName="app__header-item--active"
 				>
@@ -37,8 +29,11 @@ const Header = ({ pages }) => {
 				</NavLink>
 			))}
 			<div className="app__header-select">
-				<Select value={isLanguageExist ? locale : 'en'} onChange={lang => changeLang(lang, dispatch)}>
-					{languageOptions.map(({ label, value }) => (
+				<Select
+					value={checkLanguageSupport(locale)}
+					onChange={nextLanguage => changeLang({ history, currentLanguage: locale, nextLanguage })}
+				>
+					{supportLanguages.map(({ label, value }) => (
 						<Option key={value} value={value}>
 							{label}
 						</Option>

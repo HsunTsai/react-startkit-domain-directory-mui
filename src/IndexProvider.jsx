@@ -1,7 +1,10 @@
-import React, { useEffect, createContext, useReducer } from 'react';
+import React, { useEffect, useState, createContext, useReducer } from 'react';
 import { IntlProvider } from 'react-intl';
-
-import { changeLang } from './app/appAction';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import services from './app/config/services';
+import Loading from './app/common/loading/Loading';
+import { changeLang, supportLanguages } from './app/appAction';
 
 // 將 combineReducer 後的 Reducer import
 import reducers from './indexReducerRoot';
@@ -16,28 +19,48 @@ export { ReducerContext };
 */
 const initState = reducers();
 
-const IndexProvider = ({ children }) => {
+const IndexProvider = ({ match, history, children }) => {
+	const [i18n, setI18n] = useState();
+	const {
+		params: { locale },
+	} = match;
+
 	// 使用 useReducer 將創建後的 state 及 dispatch 放進 reducer
 	const reducer = useReducer(reducers, initState);
-	const [state, dispatch] = reducer;
-	const { language } = state.app;
 	useEffect(() => {
-		/* 將瀏覽器預設語系帶入 */
-		let lang = navigator.languages ? navigator.languages[0] : navigator.language || navigator.userLanguage;
-		lang = lang.toLowerCase();
-		changeLang(lang, dispatch);
-	}, []);
-	// console.info('language change', language);
-	if (language && language.messages) {
-		return (
-			<ReducerContext.Provider value={reducer}>
-				<IntlProvider locale={language.locale} messages={language.messages}>
-					{children}
-				</IntlProvider>
-			</ReducerContext.Provider>
-		);
-	}
-	return false;
+		/* 檢查 語系最常不會超過9字元 => https://github.com/ladjs/i18n-locales
+		 * 檢查 本系統是否支援該語系 */
+		if (locale && locale.length < 9 && supportLanguages.some(({ value }) => value === locale)) {
+			axios
+				.get(`${services.getLocale}/${locale}.json`)
+				.then(response => setI18n({ locale, messages: response.data }))
+				/* 語系取得失敗時使用英文 */
+				.catch(() => {
+					axios
+						.get(`${services.getLocale}/en.json`)
+						.then(response => setI18n({ locale: 'en', messages: response.data }));
+				});
+		} else {
+			/* URL沒有語系 自動將語系帶上 */
+			changeLang({ history });
+		}
+	}, [locale]);
+
+	return i18n ? (
+		<ReducerContext.Provider value={reducer}>
+			<IntlProvider locale={i18n.locale} messages={i18n.messages}>
+				{children}
+			</IntlProvider>
+		</ReducerContext.Provider>
+	) : (
+		<Loading />
+	);
+};
+
+IndexProvider.propTypes = {
+	match: PropTypes.objectOf(PropTypes.any).isRequired,
+	history: PropTypes.objectOf(PropTypes.any).isRequired,
+	children: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default IndexProvider;
