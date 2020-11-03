@@ -28,7 +28,7 @@ const Topic = ({ history }) => {
 				<RangePicker onChange={dateString => setSelectDate(JSON.stringify(dateString))} />
 			</div>
 			<div className="topic__block">
-				<Button type="primary" onClick={() => history.push(`./about`)}>
+				<Button type="primary" onClick={() => history.push({ pathname: './about' })}>
 					Go to About Page
 				</Button>
 			</div>
