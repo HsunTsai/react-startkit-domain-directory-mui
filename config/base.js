@@ -51,6 +51,7 @@ module.exports = () => {
 				title: 'React Web Title',
 				favicon: 'src/favicon.ico',
 				alwaysWriteToDisk: true,
+				chunksSortMode: 'dependency',
 				filename: 'index.html',
 				template: 'src/index.html',
 				excludeChunks: 'manifest',

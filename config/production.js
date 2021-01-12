@@ -60,6 +60,7 @@ module.exports = (env = 'production') => {
 			new CopyWebpackPlugin({
 				patterns: [
 					{ from: 'src/images', to: 'images' },
+					{ from: 'src/locales', to: 'locales' },
 					{ from: 'src/data', to: 'data' },
 					{ from: 'src/WEB-INF', to: 'WEB-INF' },
 					{ from: 'web.config', to: 'web.config' },
