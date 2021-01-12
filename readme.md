@@ -13,7 +13,7 @@ Domain Directory Structure & Airbnb eslint & Webpack
 6.Enjoy coding
 ```
 
-## How to setup your backend Server
+## How to setup with backend Server
 ```xml
 1.open VSCode search all by "(!!!"
 2.you can find "(!!!Your localhost)" 、 "(!!!Your serverhost)" 、 "(!!!Your API Path)" 、 "(!!!Your API server hostname)" 、 "(!!!Your front-end path on server)" 、 "(!!!Your back-end path on server)" 、 "(!!!frontend path on server)" 
