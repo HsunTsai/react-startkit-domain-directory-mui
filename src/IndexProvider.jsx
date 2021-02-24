@@ -36,9 +36,7 @@ const IndexProvider = ({ match, history, children }) => {
 				.then(response => setI18n({ locale, messages: response.data }))
 				/* 語系取得失敗時使用英文 */
 				.catch(() => {
-					axios
-						.get(`${services.getLocale}/en.json`)
-						.then(response => setI18n({ locale: 'en', messages: response.data }));
+					axios.get(`${services.getLocale}/en.json`).then(response => setI18n({ locale: 'en', messages: response.data }));
 				});
 		} else {
 			/* URL沒有語系 自動將語系帶上 */
