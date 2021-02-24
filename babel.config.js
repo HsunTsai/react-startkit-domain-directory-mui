@@ -5,15 +5,7 @@ const plugins = [
 	'react-hot-loader/babel',
 	'@babel/plugin-proposal-class-properties',
 	'@babel/plugin-syntax-dynamic-import',
-	[
-		'transform-imports',
-		{
-			// antd: {
-			// 	transform: 'antd/lib/${member}',
-			// 	preventFullImport: true,
-			// },
-		},
-	],
+	['transform-imports'],
 ];
 
 module.exports = api => {

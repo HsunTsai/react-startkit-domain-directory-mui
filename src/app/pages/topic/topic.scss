@@ -5,6 +5,10 @@
 		color: #666;
 		font-weight: bold;
 		font-size: 24px;
+		margin-top: 24px;
+		&:first-child {
+			margin-top: initial;
+		}
 	}
 	&__block {
 		margin-top: 12px;

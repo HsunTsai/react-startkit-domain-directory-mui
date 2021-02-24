@@ -1,6 +1,4 @@
 # /node_modules/* and /bower_components/* ignored by default
 
-/src/app/utils/notification.js
-
 # /src/app/*
 # /**/*.spec.js

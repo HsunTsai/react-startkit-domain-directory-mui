@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route, Switch, Redirect } from 'react-router-dom';
 /* You can cache page when page cahnge by import CacheRoute & CacheSwitch */
 // import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import Loadable from 'react-loadable';
+import { useSnackbar } from 'notistack';
 
+import { ReducerContext } from '../IndexProvider';
 import Header from './common/header/Header';
 import RouterLoading from './common/loading/Loading';
+import { LOAD_SNACK_BAR } from './appAction';
 
 const pages = [
 	{
@@ -31,16 +37,68 @@ const pages = [
 	},
 ];
 
-const App = () => (
-	<div className="app">
-		<Header pages={pages} />
-		<Switch>
-			{pages.map((page, index) => (
-				<Route key={index.toString()} path={`/:locale${page.path}`} component={page.component} />
-			))}
-			<Redirect to={pages[0].path} />
-		</Switch>
-	</div>
-);
+const primaryColor = '#0087DC';
+// const primaryColorFocus = '#339fe3';
+
+const secondaryColor = '#ffc400';
+
+const App = () => {
+	// eslint-disable-next-line no-unused-vars
+	const [state, dispatch] = useContext(ReducerContext);
+
+	/* default systme color mode */
+	const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'));
+	const theme = useMemo(
+		() =>
+			createMuiTheme({
+				typography: { button: { textTransform: 'none' } },
+				palette: darkMode
+					? { type: 'dark', primary: { main: primaryColor }, secondary: { main: secondaryColor } }
+					: {
+							type: 'light',
+							primary: { main: primaryColor },
+							secondary: { main: secondaryColor },
+							background: '#333',
+					  },
+				shape: { borderRadius: 3 },
+				props: {
+					MuiButton: { variant: 'contained', color: 'primary' },
+				},
+				overrides: {
+					MuiPaper: { root: { background: 'white' } },
+					MuiSelect: { root: { padding: 8 } },
+					// MuiSelect: { root: { padding: 8, backgroundColor: 'white', '&$selected&:focus': { backgroundColor: 'white' } } },
+					// MuiList: { root: { backgroundColor: 'white' } },
+					// MuiMenuItem: {
+					// 	root: {
+					// 		'&$selected': { backgroundColor: 'white' },
+					// 		'&:hover': { backgroundColor: primaryColorFocus, color: 'white' },
+					// 		'&$selected&:hover': { backgroundColor: primaryColorFocus, color: 'white' },
+					// 	},
+					// },
+				},
+			}),
+		[darkMode]
+	);
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+	useEffect(() => {
+		dispatch({ type: LOAD_SNACK_BAR, enqueueSnackbar, closeSnackbar });
+	}, [enqueueSnackbar, closeSnackbar]);
+
+	return (
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<div className="app">
+				<Header pages={pages} darkMode={darkMode} setDarkMode={setDarkMode} />
+				<Switch>
+					{pages.map((page, index) => (
+						<Route key={index.toString()} path={`/:locale${page.path}`} component={page.component} />
+					))}
+					<Redirect to={pages[0].path} />
+				</Switch>
+			</div>
+		</ThemeProvider>
+	);
+};
 
 export default hot(App);

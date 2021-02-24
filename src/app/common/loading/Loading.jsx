@@ -1,12 +1,11 @@
 import React from 'react';
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { CircularProgress } from '@material-ui/core';
 
 import './loading.scss';
 
 const Loading = () => (
 	<div className="loadingPage">
-		<Spin indicator={<LoadingOutlined style={{ fontSize: 100 }} spin />} />
+		<CircularProgress size={80} />
 	</div>
 );
 

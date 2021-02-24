@@ -1,3 +1,6 @@
+export const LOAD_SNACK_BAR = 'LOAD_SNACK_BAR';
+export const SHOW_SNACK_BAR = 'SHOW_SNACK_BAR';
+
 export const supportLanguages = [
 	{ value: 'en', label: 'English' },
 	{ value: 'zh-tw', label: '繁體中文' },
@@ -25,10 +28,7 @@ export const changeLang = ({ history, currentLanguage, nextLanguage }) => {
 		});
 	} else {
 		/* 不存在 => 推入瀏覽器預設語系 */
-		const browserLanguage = (navigator.languages
-			? navigator.languages[0]
-			: navigator.language || navigator.userLanguage
-		).toLowerCase();
+		const browserLanguage = (navigator.languages ? navigator.languages[0] : navigator.language || navigator.userLanguage).toLowerCase();
 		history.push({ pathname: `/${checkLanguageSupport(browserLanguage)}${pathname}`, search });
 	}
 };
