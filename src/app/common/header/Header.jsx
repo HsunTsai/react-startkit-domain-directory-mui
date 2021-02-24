@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useRouteMatch, useHistory } from 'react-router-dom';
-import { FormControl, FormControlLabel, Select, Switch, MenuItem } from '@material-ui/core';
+import { FormControlLabel, Switch } from '@material-ui/core';
 import { changeLang, checkLanguageSupport, supportLanguages } from '../../appAction';
+import Select from '../components/select/Select';
 
 import ReactIcon from '../../../images/react_logo.png';
 
@@ -36,31 +37,12 @@ const Header = ({ pages, darkMode, setDarkMode }) => {
 				control={<Switch checked={darkMode} onChange={event => setDarkMode(event.target.checked)} color="secondary" />}
 				label="Dark"
 			/>
-			{/* i18n language selector */}
-			<FormControl variant="outlined">
-				{/* <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel> */}
-				<Select
-					MenuProps={{
-						anchorOrigin: {
-							vertical: 'bottom',
-							horizontal: 'left',
-						},
-						transformOrigin: {
-							vertical: 'top',
-							horizontal: 'left',
-						},
-						getContentAnchorEl: null,
-					}}
-					value={checkLanguageSupport(locale)}
-					onChange={event => changeLang({ history, currentLanguage: locale, nextLanguage: event.target.value })}
-				>
-					{supportLanguages.map(({ label, value }) => (
-						<MenuItem key={value} value={value}>
-							{label}
-						</MenuItem>
-					))}
-				</Select>
-			</FormControl>
+			{/* <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel> */}
+			<Select
+				value={checkLanguageSupport(locale)}
+				onChange={event => changeLang({ history, currentLanguage: locale, nextLanguage: event.target.value })}
+				options={supportLanguages}
+			/>
 			{/* <Select
 				value={checkLanguageSupport(locale)}
 				onChange={nextLanguage => changeLang({ history, currentLanguage: locale, nextLanguage })}

@@ -21,6 +21,7 @@ module.exports = (env = 'development') => {
 		},
 		devServer: {
 			port: 9999,
+			host: '0.0.0.0',
 			historyApiFallback: true,
 			contentBase: path.join(__dirname, '/../src'),
 			https: false,

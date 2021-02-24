@@ -1,0 +1,17 @@
+.components {
+	padding: 16px;
+	&__title {
+		font-weight: bold;
+		font-size: 18px;
+		margin-top: 24px;
+		&:first-child {
+			margin-top: initial;
+		}
+	}
+	&__table {
+		height: 300px;
+		&2 {
+			height: 400px;
+		}
+	}
+}

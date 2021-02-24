@@ -7,9 +7,9 @@ import { Button } from '@material-ui/core';
 import { ReducerContext } from '../../../IndexProvider';
 import { SHOW_SNACK_BAR } from '../../appAction';
 import { countUp, countDown } from './homeAction';
+import services from '../../config/services';
 
 import './home.scss';
-import services from '../../config/services';
 
 const Home = () => {
 	// const { closeSnackbar } = useSnackbar();
@@ -23,9 +23,7 @@ const Home = () => {
 		<div className="home">
 			{/* Header */}
 			<div className={classNames('home-box', 'home-box__header')}>
-				<div className={classNames('home-box__header-title', { 'home-box__header-title--active': active })}>
-					Home Page Home Page Home Page Home Page Home Page Home Page Home Page
-				</div>
+				<div className={classNames('home-box__header-title', { 'home-box__header-title--active': active })}>Home Page</div>
 				<Button className="home-box__header-btn" type="primary" size="small" onClick={() => setActive(!active)}>
 					{`Home Title ${active ? 'inActive' : 'Active'}`}
 				</Button>

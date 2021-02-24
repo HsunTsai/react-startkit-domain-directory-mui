@@ -16,6 +16,11 @@ import { LOAD_SNACK_BAR } from './appAction';
 
 const pages = [
 	{
+		path: '/components',
+		name: 'Components',
+		component: Loadable({ loader: () => import('./pages/components/Components'), loading: RouterLoading }),
+	},
+	{
 		path: '/home',
 		name: 'Home',
 		component: Loadable({ loader: () => import('./pages/home/Home'), loading: RouterLoading }),
@@ -54,19 +59,23 @@ const App = () => {
 				typography: { button: { textTransform: 'none' } },
 				palette: darkMode
 					? { type: 'dark', primary: { main: primaryColor }, secondary: { main: secondaryColor } }
-					: {
-							type: 'light',
-							primary: { main: primaryColor },
-							secondary: { main: secondaryColor },
-							background: '#333',
-					  },
+					: { type: 'light', primary: { main: primaryColor }, secondary: { main: secondaryColor } },
 				shape: { borderRadius: 3 },
 				props: {
 					MuiButton: { variant: 'contained', color: 'primary' },
+					MuiSelect: {
+						// 讓下拉選單可以沿著Select下緣跳出
+						MenuProps: {
+							anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
+							transformOrigin: { vertical: 'top', horizontal: 'left' },
+							getContentAnchorEl: null,
+						},
+					},
 				},
 				overrides: {
 					MuiPaper: { root: { background: 'white' } },
 					MuiSelect: { root: { padding: 8 } },
+					MuiButton: { root: { padding: '4px 8px', '&$outlined': { padding: '4px 8px' } } },
 					// MuiSelect: { root: { padding: 8, backgroundColor: 'white', '&$selected&:focus': { backgroundColor: 'white' } } },
 					// MuiList: { root: { backgroundColor: 'white' } },
 					// MuiMenuItem: {

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Checkbox, FormControlLabel, FormGroup, TextField } from '@material-ui/core';
+import { Button, FormGroup, TextField } from '@material-ui/core';
+import Checkbox from '../../common/components/checkbox/Checkbox';
 
 import './topic.scss';
 
 const checkboxList = [
-	{ label: '按起來', name: 'Click' },
-	{ label: '跳起來', name: 'Jump' },
-	{ label: '飛起來', name: 'Fly' },
+	{ label: '按起來', value: 'Click' },
+	{ label: '跳起來', value: 'Jump' },
+	{ label: '飛起來', value: 'Fly' },
 ];
 
 const Topic = ({ history }) => {
@@ -21,18 +22,14 @@ const Topic = ({ history }) => {
 			<div className="topic__title">{`Checkbox list (${JSON.stringify(checkboxStatus)})`}</div>
 			<div className="topic__block">
 				<FormGroup row>
-					{checkboxList.map(({ label, name }, i) => (
-						<FormControlLabel
-							key={i.toString()}
-							control={
-								<Checkbox
-									checked={Boolean(checkboxStatus[name])}
-									onChange={event => setCheckboxStatus({ ...checkboxStatus, [event.target.name]: event.target.checked })}
-									name={name}
-								/>
-							}
-							label={label}
-						/>
+					{checkboxList.map(({ label, value }) => (
+						<Checkbox
+							key={value}
+							checked={Boolean(checkboxStatus[value])}
+							onCheck={checked => setCheckboxStatus({ ...checkboxStatus, [value]: checked })}
+						>
+							{label}
+						</Checkbox>
 					))}
 				</FormGroup>
 			</div>
