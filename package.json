@@ -85,7 +85,8 @@
 	},
 	"scripts": {
 		"start": "webpack-dev-server --mode development --profile --colors --hot --progress",
-		"deploy": "webpack --mode production --profile --colors --progress",
+		"deploy": "webpack --mode production --profile --colors",
+		"deploy-p": "webpack --mode production --profile --colors --progress",
 		"deployIIS": "webpack --mode production --isIIS=true --profile --colors  --progress && deployIIS.bat",
 		"format": "prettier --write \"{,src/**/}*.{js,jsx}\""
 	}
