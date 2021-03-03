@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const package = require('../package.json');
 
-const contextRoot = '/uicomponent/',
+const contextRoot = '/', // /uicomponent/
 	domain = 'http://(!!!Your serverhost)/(!!!Your server back-end path)';
 // backend & frontend in the same server
 // domain = '/(!!!Your server back-end path)'
