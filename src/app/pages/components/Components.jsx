@@ -45,10 +45,9 @@ const todoRows = [
 	{ component: 'Spin' },
 	{ component: 'AutoComplete' },
 	{ component: 'Empty' },
-	{ component: 'Spin' },
 	{ component: 'Radio' }, // 和Checkbox做法相同
 	{ component: 'BackTop' },
-	{ component: 'Drawer' },
+	{ component: 'Drawer', demo: '請直接做在Header' },
 ];
 
 const Components = () => {
