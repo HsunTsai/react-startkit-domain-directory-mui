@@ -3,6 +3,7 @@ import { Button } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import Checkbox from '../../common/components/checkbox/Checkbox';
 import Select from '../../common/components/select/Select';
+
 // import PropTypes from 'prop-types';
 
 import './components.scss';
@@ -37,6 +38,10 @@ const finishRows = [
 			/>
 		),
 	},
+	{
+		component: 'Drawer',
+		demo: <div>Header上</div>,
+	},
 ];
 
 /* 尚未轉換的元件 */
@@ -47,7 +52,6 @@ const todoRows = [
 	{ component: 'Empty' },
 	{ component: 'Radio' }, // 和Checkbox做法相同
 	{ component: 'BackTop' },
-	{ component: 'Drawer', demo: '請直接做在Header' },
 ];
 
 const Components = () => {

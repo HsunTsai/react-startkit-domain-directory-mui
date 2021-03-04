@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 import { NavLink, useRouteMatch, useHistory } from 'react-router-dom';
-import { FormControlLabel, Switch } from '@material-ui/core';
+import { FormControlLabel, Switch, List, ListItem, ListItemIcon, ListItemText, IconButton } from '@material-ui/core';
+import { Inbox, Drafts, Dehaze } from '@material-ui/icons';
 import { changeLang, checkLanguageSupport, supportLanguages } from '../../appAction';
 import Select from '../components/select/Select';
-
+import Drawer from '../components/drawer/Drawer';
 import ReactIcon from '../../../images/react_logo.png';
 
 import './header.scss';
 
 const Header = ({ pages, darkMode, setDarkMode }) => {
+	const [drawerOpen, setDrawerOpen] = useState(false);
 	const history = useHistory();
 	const {
 		url,
 		params: { locale },
 	} = useRouteMatch();
 
+	const useStyles = makeStyles(theme => ({
+		margin: {
+			margin: theme.spacing(1),
+		},
+		extendedIcon: {
+			marginRight: theme.spacing(1),
+		},
+	}));
+	const classes = useStyles();
 	return (
 		<div className="header">
 			<img alt="" className="header__icon" src={ReactIcon} />
@@ -43,6 +55,35 @@ const Header = ({ pages, darkMode, setDarkMode }) => {
 				onChange={event => changeLang({ history, currentLanguage: locale, nextLanguage: event.target.value })}
 				options={supportLanguages}
 			/>
+			<IconButton aria-label="delete" className={classes.margin} onClick={() => setDrawerOpen(true)}>
+				<Dehaze fontSize="large" />
+			</IconButton>
+			<Drawer
+				title={
+					<div className="header-logo">
+						<img alt="" className="header__icon" src={ReactIcon} />
+					</div>
+				}
+				width={300}
+				placement="right"
+				onClose={() => setDrawerOpen(false)}
+				visible={drawerOpen}
+			>
+				<List component="nav" aria-label="main mailbox folders">
+					<ListItem button>
+						<ListItemIcon>
+							<Inbox />
+						</ListItemIcon>
+						<ListItemText primary="Inbox" />
+					</ListItem>
+					<ListItem button>
+						<ListItemIcon>
+							<Drafts />
+						</ListItemIcon>
+						<ListItemText primary="Drafts" />
+					</ListItem>
+				</List>
+			</Drawer>
 			{/* <Select
 				value={checkLanguageSupport(locale)}
 				onChange={nextLanguage => changeLang({ history, currentLanguage: locale, nextLanguage })}
