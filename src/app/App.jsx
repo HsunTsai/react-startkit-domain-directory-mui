@@ -46,6 +46,7 @@ const primaryColor = '#0087DC';
 // const primaryColorFocus = '#339fe3';
 
 const secondaryColor = '#ffc400';
+const borderColor = '#d9d9d9';
 
 const App = () => {
 	// eslint-disable-next-line no-unused-vars
@@ -76,6 +77,30 @@ const App = () => {
 					MuiPaper: { root: { background: 'white' } },
 					MuiSelect: { root: { padding: 8 } },
 					MuiButton: { root: { padding: '4px 8px', '&$outlined': { padding: '4px 8px' } } },
+					MuiAutocomplete: {
+						inputRoot: {
+							backgroundColor: darkMode ? '#303030' : '#fff',
+							'&:hover .MuiOutlinedInput-notchedOutline': { borderColor: primaryColor },
+						},
+					},
+					MuiChip: {
+						root: {
+							height: '28px',
+							borderRadius: '2px',
+							backgroundColor: darkMode ? '#595959' : '#f5f5f5',
+							border: '1px solid',
+							borderColor: darkMode ? '#8c8c8c' : borderColor,
+						},
+					},
+					MuiOutlinedInput: {
+						root: {
+							borderColor,
+							'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+								borderWidth: '1px',
+								boxShadow: '0 0 0 2px rgb(24 144 255 / 20%)',
+							},
+						},
+					},
 					// MuiSelect: { root: { padding: 8, backgroundColor: 'white', '&$selected&:focus': { backgroundColor: 'white' } } },
 					// MuiList: { root: { backgroundColor: 'white' } },
 					// MuiMenuItem: {
