@@ -8,7 +8,7 @@ const CustomSpin = props => {
 
 	return (
 		<div className="customSpin" style={containerAlign}>
-			<Fade in={spinning} style={{ transitionDelay: '100ms' }} unmountOnExit>
+			<Fade in={spinning} style={{ transitionDelay: '300ms' }} unmountOnExit>
 				<div className="customSpin__spin">
 					<CircularProgress {...rest} />
 				</div>
