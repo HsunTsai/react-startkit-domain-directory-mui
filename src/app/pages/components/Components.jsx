@@ -5,6 +5,7 @@ import VerticalAlignTopIcon from '@material-ui/icons/VerticalAlignTop';
 import Checkbox from '../../common/components/checkbox/Checkbox';
 import Select from '../../common/components/select/Select';
 import BackTop from '../../common/components/backTop/BackTop';
+import Empty from '../../common/components/empty/Empty';
 
 // import PropTypes from 'prop-types';
 import Autocomplete from '../../common/components/autocomplete/Autocomplete';
@@ -93,11 +94,14 @@ const finishRows = ({ loading, setLoading }) => {
 			component: 'BackTop',
 			demo: <div>右下角，滑高度超過400後顯示</div>,
 		},
+		{
+			component: 'Empty',
+			demo: <Empty />,
+		},
 	];
 };
 /* 尚未轉換的元件 */
 const todoRows = [
-	{ component: 'Empty' },
 	{ component: 'Radio' }, // 和Checkbox做法相同
 ];
 
@@ -109,7 +113,7 @@ const Components = () => {
 			<div className="components__table">
 				<DataGrid
 					autoHeight
-					rowHeight={80}
+					rowHeight={150}
 					rows={finishRows({ loading, setLoading }).map((row, i) => ({ ...row, id: i + 1 }))}
 					columns={columns}
 					pageSize={5}
