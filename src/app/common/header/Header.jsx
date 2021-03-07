@@ -21,7 +21,7 @@ const Header = ({ pages, darkMode, setDarkMode }) => {
 
 	const useStyles = makeStyles(theme => ({
 		margin: {
-			margin: theme.spacing(1),
+			margin: theme.spacing(0),
 		},
 		extendedIcon: {
 			marginRight: theme.spacing(1),
@@ -56,7 +56,7 @@ const Header = ({ pages, darkMode, setDarkMode }) => {
 				options={supportLanguages}
 			/>
 			<IconButton aria-label="delete" className={classes.margin} onClick={() => setDrawerOpen(true)}>
-				<Dehaze fontSize="large" />
+				<Dehaze />
 			</IconButton>
 			<Drawer
 				title={

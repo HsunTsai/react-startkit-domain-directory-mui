@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
+import VerticalAlignTopIcon from '@material-ui/icons/VerticalAlignTop';
 import Checkbox from '../../common/components/checkbox/Checkbox';
 import Select from '../../common/components/select/Select';
+import BackTop from '../../common/components/backTop/BackTop';
 
 // import PropTypes from 'prop-types';
 import Autocomplete from '../../common/components/autocomplete/Autocomplete';
@@ -87,13 +89,16 @@ const finishRows = ({ loading, setLoading }) => {
 			component: 'Drawer',
 			demo: <div>Header上</div>,
 		},
+		{
+			component: 'BackTop',
+			demo: <div>右下角，滑高度超過400後顯示</div>,
+		},
 	];
 };
 /* 尚未轉換的元件 */
 const todoRows = [
 	{ component: 'Empty' },
 	{ component: 'Radio' }, // 和Checkbox做法相同
-	{ component: 'BackTop' },
 ];
 
 const Components = () => {
@@ -123,6 +128,9 @@ const Components = () => {
 					checkboxSelection
 				/>
 			</div>
+			<BackTop>
+				<VerticalAlignTopIcon />
+			</BackTop>
 		</div>
 	);
 };
