@@ -1,0 +1,19 @@
+.drawer {
+	&__icon {
+		margin-left: 10px;
+	}
+	&__header {
+		display: flex;
+		align-items: center;
+		padding: 10px 20px;
+		&-title {
+			font-size: 18px;
+			font-weight: bold;
+		}
+	}
+	&__list {
+		.MuiSvgIcon-root {
+			margin-left: 8px;
+		}
+	}
+}

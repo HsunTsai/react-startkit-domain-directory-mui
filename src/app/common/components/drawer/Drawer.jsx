@@ -1,61 +1,42 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Drawer, Divider } from '@material-ui/core';
+import { Drawer, Divider, IconButton } from '@material-ui/core';
+import { DehazeRounded } from '@material-ui/icons';
+import DrawerList from './DrawerList';
 
-const CustomDrawer = props => {
-	const { title, width, placement, onClose, visible, children, ...prop } = props;
-	const useStyles = makeStyles(theme => ({
-		drawer: {
-			width,
-			flexShrink: 0,
-		},
-		drawerPaper: {
-			width,
-		},
-		// necessary for content to be below app bar
-		toolbar: theme.mixins.toolbar,
-		content: {
-			flexGrow: 1,
-			backgroundColor: theme.palette.background.default,
-			padding: theme.spacing(3),
-		},
-	}));
-	const classes = useStyles();
+import './drawer.scss';
+
+const CustomDrawer = ({ title, logo, drawerList }) => {
+	const [open, setOpen] = useState(false);
 	return (
-		<Drawer
-			// eslint-disable-next-line react/jsx-props-no-spreading
-			{...prop}
-			anchor={placement}
-			open={visible}
-			onClose={onClose}
-			onKeyDown={onClose}
-			className={classes.drawer}
-			classes={{
-				paper: classes.drawerPaper,
-			}}
-		>
-			<div className={classes.toolbar}>{title}</div>
-			<Divider />
-			{children}
-		</Drawer>
+		<div className="drawer">
+			<IconButton className="drawer__icon" onClick={() => setOpen(true)}>
+				<DehazeRounded />
+			</IconButton>
+			<Drawer anchor="right" open={open} onClose={() => setOpen(false)} onKeyDown={() => setOpen(false)}>
+				{(logo || title) && (
+					<div className="drawer__header">
+						<div className="drawer__header-logo">{logo}</div>
+						<div className="drawer__header-title">{title}</div>
+					</div>
+				)}
+				<Divider />
+				<DrawerList drawerList={drawerList} setOpen={setOpen} />
+			</Drawer>
+		</div>
 	);
 };
+
 CustomDrawer.defaultProps = {
-	title: '',
-	width: 256,
-	placement: 'right',
-	onClose: () => {},
-	visible: false,
-	children: '',
+	title: undefined,
+	logo: undefined,
+	drawerList: undefined,
 };
+
 CustomDrawer.propTypes = {
-	title: PropTypes.node,
-	width: PropTypes.number,
-	placement: PropTypes.string,
-	onClose: PropTypes.func,
-	visible: PropTypes.bool,
-	children: PropTypes.node,
+	title: PropTypes.string,
+	logo: PropTypes.node,
+	drawerList: PropTypes.arrayOf(PropTypes.any),
 };
 
 export default CustomDrawer;

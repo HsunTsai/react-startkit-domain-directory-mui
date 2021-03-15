@@ -2,4 +2,9 @@
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	&__icon {
+		width: 36px;
+		height: 36px;
+		margin-right: 16px;
+	}
 }

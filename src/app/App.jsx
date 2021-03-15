@@ -8,31 +8,37 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 // import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import Loadable from 'react-loadable';
 import { useSnackbar } from 'notistack';
+import { AccessTimeSharp, Inbox, Drafts } from '@material-ui/icons';
 
 import { ReducerContext } from '../IndexProvider';
 import Header from './common/header/Header';
 import RouterLoading from './common/loading/Loading';
 import { LOAD_SNACK_BAR } from './appAction';
+import ReactIcon from '../images/react_logo.png';
 
 const pages = [
 	{
 		path: '/components',
 		name: 'Components',
+		icon: <AccessTimeSharp />,
 		component: Loadable({ loader: () => import('./pages/components/Components'), loading: RouterLoading }),
 	},
 	{
 		path: '/home',
 		name: 'Home',
+		icon: <Inbox />,
 		component: Loadable({ loader: () => import('./pages/home/Home'), loading: RouterLoading }),
 	},
 	{
 		path: '/about',
 		name: 'About',
+		icon: <Drafts />,
 		component: Loadable({ loader: () => import('./pages/about/About'), loading: RouterLoading }),
 	},
 	{
 		path: '/topic',
 		name: 'Topic',
+		icon: <AccessTimeSharp />,
 		component: Loadable({ loader: () => import('./pages/topic/Topic'), loading: RouterLoading }),
 	},
 	{
@@ -74,7 +80,7 @@ const App = () => {
 					},
 				},
 				overrides: {
-					MuiPaper: { root: { background: 'white' } },
+					MuiPaper: { root: { background: 'white', minWidth: 300 } },
 					MuiSelect: { root: { padding: 8 } },
 					MuiButton: { root: { padding: '4px 8px', '&$outlined': { padding: '4px 8px' } } },
 					MuiAutocomplete: {
@@ -123,7 +129,13 @@ const App = () => {
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<div className="app">
-				<Header pages={pages} darkMode={darkMode} setDarkMode={setDarkMode} />
+				<Header
+					title="React Demo"
+					logo={<img alt="" className="app__icon" src={ReactIcon} />}
+					pages={pages}
+					darkMode={darkMode}
+					setDarkMode={setDarkMode}
+				/>
 				<Switch>
 					{pages.map((page, index) => (
 						<Route key={index.toString()} path={`/:locale${page.path}`} component={page.component} />
