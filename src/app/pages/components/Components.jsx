@@ -66,20 +66,7 @@ const finishRows = ({ loading, setLoading }) => {
 		},
 		{
 			component: 'Autocomplete',
-			demo: (
-				<Autocomplete
-					style={{ width: '100%' }}
-					options={autocompleteOptions}
-					value={null}
-					defaultValue={null}
-					onChange={() => {}}
-					onSearch={() => {}}
-					placeholder="Search..."
-					noOptionsText="No Options"
-					loading={loading}
-					loadingText="Loading..."
-				/>
-			),
+			demo: <Autocomplete style={{ width: '100%' }} options={autocompleteOptions} loading={loading} loadingText="Loading..." />,
 		},
 		// 同ant Select多選
 		{

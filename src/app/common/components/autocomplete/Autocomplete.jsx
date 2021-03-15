@@ -4,23 +4,11 @@ import { TextField, Chip } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { Close, ExpandMore } from '@material-ui/icons';
 import Spin from '../spin/Spin';
+
 import './autocomplete.scss';
 
 const CustomAutocomplete = props => {
-	const {
-		options,
-		value,
-		defaultValue,
-		multiple,
-		onChange,
-		onSearch,
-		renderInput,
-		renderTags,
-		placeholder,
-		loading,
-		loadingText,
-		...rest
-	} = props;
+	const { value, defaultValue, multiple, onChange, onSearch, renderInput, renderTags, placeholder, loading, ...rest } = props;
 	const defaultValueCheck = defaultValue ? [defaultValue] : [];
 	const [selected, setSelected] = useState(multiple ? defaultValueCheck : defaultValue);
 
@@ -35,7 +23,6 @@ const CustomAutocomplete = props => {
 	return (
 		<div className="autocomplete">
 			<Autocomplete
-				options={options}
 				value={value || selected}
 				defaultValue={selected}
 				multiple={multiple}
@@ -48,7 +35,6 @@ const CustomAutocomplete = props => {
 				getOptionLabel={option => (option && option.label) || ''}
 				renderInput={renderInput || defaultInput}
 				renderTags={renderTags || defaultTag}
-				loadingText={loadingText}
 				popupIcon={<ExpandMore />}
 				{...rest}
 			/>
