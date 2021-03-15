@@ -1,43 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import $ from 'jquery';
-import { Link } from '@material-ui/core';
+import classNames from 'classnames';
+import debounce from 'lodash/debounce';
+import { Fade, Box } from '@material-ui/core';
+import ExpandLessSharpIcon from '@material-ui/icons/ExpandLessSharp';
+
 import './backTop.scss';
 
+const scrollToTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
 const BackTop = props => {
-	const { duration, visibilityHeight, onClick, children, ...prop } = props;
-	const [visible, setVisible] = useState(false);
-	const handleClick = () => {
-		onClick();
-		$('html,body').animate({ scrollTop: 0 }, duration);
-	};
-	const handleScroll = () => {
-		const scrollTop = window.scrollY;
-		setVisible(scrollTop >= visibilityHeight);
-	};
+	const { className, visibilityHeight, children, onClick } = props;
+	const [show, setShow] = useState(false);
+
+	const scrollDebounce = useRef(
+		debounce(() => {
+			const top = window.scrollY;
+			setShow(top >= visibilityHeight);
+		}, 100)
+	).current;
+
 	useEffect(() => {
-		window.addEventListener('scroll', handleScroll);
+		// const scrollEvent = () => scrollDebounce.current;
+		window.addEventListener('scroll', () => scrollDebounce());
 		return () => {
-			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('scroll', () => scrollDebounce());
 		};
 	}, []);
+
 	return (
-		visible && (
-			<Link className="BackTop" onClick={handleClick} component="button" {...prop}>
-				{children}
-			</Link>
-		)
+		<Fade in={show} timeout={500} unmountOnExit>
+			<div className={classNames('backTop', className)} onClick={() => scrollToTop() && onClick()}>
+				{children && (
+					<Box className="backTop__default" color="text.primary" bgcolor="primary.main" borderColor="text.secondary">
+						<ExpandLessSharpIcon />
+						Top
+					</Box>
+				)}
+			</div>
+		</Fade>
 	);
 };
 
 BackTop.defaultProps = {
-	duration: 450,
+	className: undefined,
 	visibilityHeight: 400,
 	onClick: () => {},
-	children: '',
+	children: undefined,
 };
 BackTop.propTypes = {
-	duration: PropTypes.number,
+	className: PropTypes.string,
 	visibilityHeight: PropTypes.number,
 	onClick: PropTypes.func,
 	children: PropTypes.node,
