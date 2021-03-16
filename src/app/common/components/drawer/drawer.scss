@@ -6,13 +6,14 @@
 	&__header {
 		display: flex;
 		align-items: center;
-		padding: 10px 20px;
+		padding: 20px;
 		&-title {
 			font-size: 18px;
 			font-weight: bold;
 		}
 	}
 	&__list {
+		padding: 10px !important;
 		.MuiSvgIcon-root {
 			margin-left: 8px;
 		}

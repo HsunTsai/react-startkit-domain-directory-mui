@@ -19,7 +19,7 @@ const DrawerList = ({ drawerList, setOpen }) => {
 							setOpen(false);
 						}}
 					>
-						<ListItemIcon>{icon}</ListItemIcon>
+						{icon && <ListItemIcon>{icon}</ListItemIcon>}
 						<ListItemText primary={name} />
 					</ListItem>
 				))}
