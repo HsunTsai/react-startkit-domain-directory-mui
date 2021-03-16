@@ -22,23 +22,25 @@ const Header = ({ title, logo, pages, darkMode, setDarkMode }) => {
 			<div className="header__title">{title}</div>
 			{/* page links */}
 			<div className="header__links">
-				{pages.map(page => (
-					<NavLink
-						key={page.path}
-						to={`${url}${page.path}`}
-						className="header__links-item"
-						activeClassName="header__links-item--active"
-					>
-						{page.name}
-					</NavLink>
-				))}
+				{pages
+					.filter(({ showInHeader }) => showInHeader)
+					.map(({ path, name }) => (
+						<NavLink
+							key={path}
+							to={`${url}${path}`}
+							className="header__links-item"
+							activeClassName="header__links-item--active"
+						>
+							{name}
+						</NavLink>
+					))}
 			</div>
-			{/* Setting color mode (dark or light) */}
+			{/* 色系轉換 */}
 			<FormControlLabel
 				control={<Switch checked={darkMode} onChange={event => setDarkMode(event.target.checked)} color="secondary" />}
 				label="Dark"
 			/>
-			{/* <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel> */}
+			{/* 語系 */}
 			<Select
 				value={checkLanguageSupport(locale)}
 				onChange={event => changeLang({ history, currentLanguage: locale, nextLanguage: event.target.value })}

@@ -1,8 +1,8 @@
 .header {
 	display: flex;
 	align-items: center;
-	background: #0087dc;
-	padding: 4px 12px;
+	background: #0087DC;
+	padding: 12px 36px;
 	&__title {
 		font-size: 18px;
 		font-weight: bold;
@@ -11,20 +11,26 @@
 	&__links {
 		flex: 1;
 		display: flex;
+		justify-content: flex-end;
 		&-item {
-			line-height: 36px;
-			color: white;
+			color: #aaaaaa;
 			text-decoration: none;
-			margin-right: 24px;
 			font-weight: bold;
-			font-size: 18px;
+			padding: 8px 14px ;
 			&--active {
-				text-shadow: 2px 2px 3px #434a54;
+				color: white;
+				border-bottom: 2px solid white;
 			}
 			&:hover {
 				color: white;
-				text-shadow: 2px 2px 3px #434a54;
+				border-bottom: 2px solid white;
 			}
 		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.header__links {
+		display: none;
 	}
 }

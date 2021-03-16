@@ -1,5 +1,6 @@
 .drawer {
 	&__icon {
+		display: none !important;
 		margin-left: 10px;
 	}
 	&__header {
@@ -14,6 +15,17 @@
 	&__list {
 		.MuiSvgIcon-root {
 			margin-left: 8px;
+		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.drawer {
+		flex: 1;
+		display: flex;
+		justify-content: flex-end;
+		&__icon {
+			display: flex !important;
 		}
 	}
 }

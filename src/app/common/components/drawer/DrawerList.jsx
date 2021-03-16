@@ -28,7 +28,7 @@ const DrawerList = ({ drawerList, setOpen }) => {
 };
 
 DrawerList.propTypes = {
-	drawerList: PropTypes.arrayOf({ text: PropTypes.string, icon: PropTypes.node }).isRequired,
+	drawerList: PropTypes.arrayOf(PropTypes.any).isRequired,
 	setOpen: PropTypes.func.isRequired,
 };
 
