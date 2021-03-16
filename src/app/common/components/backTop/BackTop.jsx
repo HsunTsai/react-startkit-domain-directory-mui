@@ -7,7 +7,13 @@ import ExpandLessSharpIcon from '@material-ui/icons/ExpandLessSharp';
 
 import './backTop.scss';
 
-const scrollToTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+const scrollToTop = () => {
+	if (window.scrollTo) {
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+	} else {
+		window.scrollTop = 0;
+	}
+};
 
 const BackTop = props => {
 	const { className, visibilityHeight, children, onClick } = props;
