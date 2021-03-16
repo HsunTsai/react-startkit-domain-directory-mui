@@ -3,6 +3,10 @@
 	align-items: center;
 	background: #0087DC;
 	padding: 12px 36px;
+	position: fixed;
+	top: 0;
+	z-index: 10;
+	width: 100%;
 	&__title {
 		font-size: 18px;
 		font-weight: bold;
