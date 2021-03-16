@@ -1,0 +1,6 @@
+[
+	{ "label": "Female", "value": "female", "disabled": false },
+	{ "label": "Male", "value": "male", "disabled": false },
+	{ "label": "Other", "value": "other", "disabled": false },
+	{ "label": "(Disabled option)", "value": "disabled", "disabled": true }
+]

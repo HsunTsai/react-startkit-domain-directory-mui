@@ -3,6 +3,7 @@ import { Button } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import VerticalAlignTopIcon from '@material-ui/icons/VerticalAlignTop';
 import Checkbox from '../../common/components/checkbox/Checkbox';
+import Radio from '../../common/components/radio/Radio';
 import Select from '../../common/components/select/Select';
 import BackTop from '../../common/components/backTop/BackTop';
 import Empty from '../../common/components/empty/Empty';
@@ -11,6 +12,7 @@ import Empty from '../../common/components/empty/Empty';
 import Autocomplete from '../../common/components/autocomplete/Autocomplete';
 import Spin from '../../common/components/spin/Spin';
 import autocompleteOptions from './data/autocompleteData.json';
+import radioOptions from './data/radioData.json';
 
 import './components.scss';
 
@@ -85,12 +87,14 @@ const finishRows = ({ loading, setLoading }) => {
 			component: 'Empty',
 			demo: <Empty />,
 		},
+		{
+			component: 'Radio',
+			demo: <Radio options={radioOptions} name="gender" ariaLabel="gender" direction="row" />,
+		},
 	];
 };
 /* 尚未轉換的元件 */
-const todoRows = [
-	{ component: 'Radio' }, // 和Checkbox做法相同
-];
+const todoRows = [];
 
 const Components = () => {
 	const [loading, setLoading] = useState(false);

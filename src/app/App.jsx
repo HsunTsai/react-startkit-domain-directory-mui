@@ -9,6 +9,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import { useSnackbar } from 'notistack';
 import { AccessTimeSharp, Inbox, Drafts } from '@material-ui/icons';
+import { antTheme } from './utils/antTheme';
 
 import { ReducerContext } from '../IndexProvider';
 import Header from './common/header/Header';
@@ -48,78 +49,15 @@ const pages = [
 	},
 ];
 
-const primaryColor = '#0087DC';
-// const primaryColorFocus = '#339fe3';
-
-const secondaryColor = '#ffc400';
-const borderColor = '#d9d9d9';
-
 const App = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [state, dispatch] = useContext(ReducerContext);
 
 	/* default systme color mode */
 	const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'));
-	const theme = useMemo(
-		() =>
-			createMuiTheme({
-				typography: { button: { textTransform: 'none' } },
-				palette: darkMode
-					? { type: 'dark', primary: { main: primaryColor }, secondary: { main: secondaryColor } }
-					: { type: 'light', primary: { main: primaryColor }, secondary: { main: secondaryColor } },
-				shape: { borderRadius: 3 },
-				props: {
-					MuiButton: { variant: 'contained', color: 'primary' },
-					MuiSelect: {
-						// 讓下拉選單可以沿著Select下緣跳出
-						MenuProps: {
-							anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
-							transformOrigin: { vertical: 'top', horizontal: 'left' },
-							getContentAnchorEl: null,
-						},
-					},
-				},
-				overrides: {
-					MuiPaper: { root: { background: 'white', minWidth: 300 } },
-					MuiSelect: { root: { padding: 8 } },
-					MuiButton: { root: { padding: '4px 8px', '&$outlined': { padding: '4px 8px' } } },
-					MuiAutocomplete: {
-						inputRoot: {
-							backgroundColor: darkMode ? '#303030' : '#fff',
-							'&:hover .MuiOutlinedInput-notchedOutline': { borderColor: primaryColor },
-						},
-					},
-					MuiChip: {
-						root: {
-							height: '28px',
-							borderRadius: '2px',
-							backgroundColor: darkMode ? '#595959' : '#f5f5f5',
-							border: '1px solid',
-							borderColor: darkMode ? '#8c8c8c' : borderColor,
-						},
-					},
-					MuiOutlinedInput: {
-						root: {
-							borderColor,
-							'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-								borderWidth: '1px',
-								boxShadow: '0 0 0 2px rgb(24 144 255 / 20%)',
-							},
-						},
-					},
-					// MuiSelect: { root: { padding: 8, backgroundColor: 'white', '&$selected&:focus': { backgroundColor: 'white' } } },
-					// MuiList: { root: { backgroundColor: 'white' } },
-					// MuiMenuItem: {
-					// 	root: {
-					// 		'&$selected': { backgroundColor: 'white' },
-					// 		'&:hover': { backgroundColor: primaryColorFocus, color: 'white' },
-					// 		'&$selected&:hover': { backgroundColor: primaryColorFocus, color: 'white' },
-					// 	},
-					// },
-				},
-			}),
-		[darkMode]
-	);
+
+	const theme = useMemo(() => createMuiTheme(antTheme({ darkMode })), [darkMode]);
+
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	useEffect(() => {
 		dispatch({ type: LOAD_SNACK_BAR, enqueueSnackbar, closeSnackbar });
