@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // import { makeStyles } from '@material-ui/core/styles';
 import { NavLink, useRouteMatch, useHistory } from 'react-router-dom';
 import { FormControlLabel, Switch } from '@material-ui/core';
-import { changeLang, checkLanguageSupport, supportLanguages } from '../../appAction';
+import { changeLang, checkLanguageSupport, supportLanguages } from '../../utils/languageTools';
 import Select from '../components/select/Select';
 import Drawer from '../components/drawer/Drawer';
 

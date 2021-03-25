@@ -4,6 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 /* You can cache page when page cahnge by import CacheRoute & CacheSwitch */
 // import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import Loadable from 'react-loadable';
@@ -52,6 +53,7 @@ const pages = [
 const App = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [state, dispatch] = useContext(ReducerContext);
+	const intl = useIntl();
 
 	/* default systme color mode */
 	const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'));
@@ -76,9 +78,9 @@ const App = () => {
 				/>
 				<Switch>
 					{pages.map((page, index) => (
-						<Route key={index.toString()} path={`/:locale${page.path}`} component={page.component} />
+						<Route key={index.toString()} path={`/${intl.locale}${page.path}`} component={page.component} />
 					))}
-					<Redirect to={pages[0].path} />
+					<Redirect to={`/${intl.locale}${pages[0].path}`} />
 				</Switch>
 			</div>
 		</ThemeProvider>
