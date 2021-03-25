@@ -1,18 +1,20 @@
 .customSpin {
 	width: 100%;
-	height: 100%;
+	min-height: 100px;
 	display: flex;
 	overflow: hidden;
 	position: relative;
+	justify-content: center;
+	align-items: flex-start;
 	&__spin {
 		width: 100%;
-		height: 100%;
+		min-height: 60px;
 		position: absolute;
 		z-index: 2;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: rgba(255, 255, 255, 0.5);
+		background-color: rgba(255, 255, 255, 0.3);
 		transition: all 0.6s ease-in-out;
 	}
 	&__main {
@@ -20,7 +22,8 @@
 		position: relative;
 		z-index: 1;
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
+		justify-content: flex-start;
 		align-items: center;
 	}
 }
