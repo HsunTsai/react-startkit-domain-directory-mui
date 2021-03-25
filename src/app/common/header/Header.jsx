@@ -22,18 +22,11 @@ const Header = ({ title, logo, pages, darkMode, setDarkMode }) => {
 			<div className="header__title">{title}</div>
 			{/* page links */}
 			<div className="header__links">
-				{pages
-					.filter(({ showInHeader }) => showInHeader)
-					.map(({ path, name }) => (
-						<NavLink
-							key={path}
-							to={`${url}${path}`}
-							className="header__links-item"
-							activeClassName="header__links-item--active"
-						>
-							{name}
-						</NavLink>
-					))}
+				{pages.map(({ path, name }) => (
+					<NavLink key={path} to={`${url}${path}`} className="header__links-item" activeClassName="header__links-item--active">
+						{name}
+					</NavLink>
+				))}
 			</div>
 			{/* 色系轉換 */}
 			<FormControlLabel

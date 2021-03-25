@@ -15,7 +15,6 @@
 	&__links {
 		flex: 1;
 		display: flex;
-		justify-content: flex-end;
 		&-item {
 			color: #aaaaaa;
 			text-decoration: none;
@@ -27,7 +26,6 @@
 			}
 			&:hover {
 				color: white;
-				border-bottom: 2px solid white;
 			}
 		}
 	}
