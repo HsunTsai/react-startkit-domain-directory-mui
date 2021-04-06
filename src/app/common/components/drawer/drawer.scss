@@ -18,9 +18,13 @@
 			margin-left: 8px;
 		}
 	}
+	&__lang {
+		margin: 16px;
+	}
 }
 
-@media screen and (max-width: 480px) {
+// 480px
+@media screen and (max-width: 600px) {
 	.drawer {
 		flex: 1;
 		display: flex;

@@ -1,7 +1,7 @@
 .header {
 	display: flex;
 	align-items: center;
-	background: #0087DC;
+	background: #0087dc;
 	padding: 12px 36px;
 	position: fixed;
 	top: 0;
@@ -19,7 +19,7 @@
 			color: #aaaaaa;
 			text-decoration: none;
 			font-weight: bold;
-			padding: 8px 14px ;
+			padding: 8px 14px;
 			&--active {
 				color: white;
 				border-bottom: 2px solid white;
@@ -31,7 +31,8 @@
 	}
 }
 
-@media screen and (max-width: 480px) {
+// 480px
+@media screen and (max-width: 600px) {
 	.header__links {
 		display: none;
 	}

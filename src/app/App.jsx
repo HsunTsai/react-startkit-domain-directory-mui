@@ -23,24 +23,28 @@ const pages = [
 		path: '/components',
 		name: 'Components',
 		icon: <AccessTimeSharp />,
+		showInHeader: true,
 		component: Loadable({ loader: () => import('./pages/components/Components'), loading: RouterLoading }),
 	},
 	{
 		path: '/home',
 		name: 'Home',
 		icon: <Inbox />,
+		showInHeader: true,
 		component: Loadable({ loader: () => import('./pages/home/Home'), loading: RouterLoading }),
 	},
 	{
 		path: '/about',
 		name: 'About',
 		icon: <Drafts />,
+		showInHeader: true,
 		component: Loadable({ loader: () => import('./pages/about/About'), loading: RouterLoading }),
 	},
 	{
 		path: '/topic',
 		name: 'Topic',
 		icon: <AccessTimeSharp />,
+		showInHeader: true,
 		component: Loadable({ loader: () => import('./pages/topic/Topic'), loading: RouterLoading }),
 	},
 	{
