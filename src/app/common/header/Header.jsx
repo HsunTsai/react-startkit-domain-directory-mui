@@ -39,8 +39,8 @@ const Header = ({ title, logo, pages, darkMode, setDarkMode }) => {
 						<NavLink
 							key={path}
 							to={`${url}${path}`}
-							className="header__links-item"
-							activeClassName="header__links-item--active"
+							className="header__links__item"
+							activeClassName="header__links__item--active"
 						>
 							{name}
 						</NavLink>
