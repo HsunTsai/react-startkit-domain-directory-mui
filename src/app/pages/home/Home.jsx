@@ -3,7 +3,6 @@ import axios from 'axios';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
 import { Button } from '@material-ui/core';
-// import { useSnackbar } from 'notistack';
 import { ReducerContext } from '../../../IndexProvider';
 import { SHOW_SNACK_BAR } from '../../appAction';
 import { countUp, countDown } from './homeAction';
@@ -12,7 +11,6 @@ import services from '../../config/services';
 import './home.scss';
 
 const Home = () => {
-	// const { closeSnackbar } = useSnackbar();
 	const [state, dispatch] = useContext(ReducerContext);
 	const { count } = state.home;
 	const { formatMessage } = useIntl();

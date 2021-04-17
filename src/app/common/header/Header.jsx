@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-// import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import debounce from 'lodash/debounce';
 import { NavLink, useRouteMatch, useHistory } from 'react-router-dom';
 import { FormControlLabel, Switch } from '@material-ui/core';
 import { changeLang, checkLanguageSupport, supportLanguages } from '../../utils/languageTools';
@@ -11,13 +12,23 @@ import './header.scss';
 
 const Header = ({ title, logo, pages, darkMode, setDarkMode }) => {
 	const history = useHistory();
+	const [hideHeader, setHideHeader] = useState(false);
 	const {
 		url,
 		params: { locale },
 	} = useRouteMatch();
 
+	const handleScroll = useRef(debounce(() => setHideHeader(window.scrollY > 100), 50)).current;
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
+
 	return (
-		<div className="header">
+		<div className={classNames('header', { 'header--hide': hideHeader })}>
 			{logo}
 			<div className="header__title">{title}</div>
 			{/* page links */}

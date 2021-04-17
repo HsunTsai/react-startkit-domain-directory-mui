@@ -7,6 +7,7 @@
 	top: 0;
 	z-index: 10;
 	width: 100%;
+	transition: top 0.3s ease-in-out;
 	&__title {
 		font-size: 18px;
 		font-weight: bold;
@@ -28,6 +29,9 @@
 				color: white;
 			}
 		}
+	}
+	&--hide {
+		top: -100px;
 	}
 }
 
