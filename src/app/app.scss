@@ -7,5 +7,9 @@
 		width: 36px;
 		height: 36px;
 		margin-right: 16px;
+		cursor: pointer;
+	}
+	&__body {
+		flex: 1;
 	}
 }

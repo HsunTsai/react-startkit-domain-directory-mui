@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 /* You can cache page when page cahnge by import CacheRoute & CacheSwitch */
 // import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
@@ -11,53 +11,42 @@ import Loadable from 'react-loadable';
 import { useSnackbar } from 'notistack';
 import { AccessTimeSharp, Inbox, Drafts } from '@material-ui/icons';
 import { antTheme } from './utils/antTheme';
-
 import { ReducerContext } from '../IndexProvider';
 import Header from './common/header/Header';
+import Footer from './common/footer/Footer';
 import RouterLoading from './common/loading/Loading';
 import { LOAD_SNACK_BAR } from './appAction';
 import ReactIcon from '../images/react_logo.png';
 
+import './app.scss';
+
+const loadablePage = loader => Loadable({ loader, loading: RouterLoading });
+
 const pages = [
-	{
-		path: '/components',
-		name: 'Components',
-		icon: <AccessTimeSharp />,
-		showInHeader: true,
-		component: Loadable({ loader: () => import('./pages/components/Components'), loading: RouterLoading }),
-	},
-	{
-		path: '/home',
-		name: 'Home',
-		icon: <Inbox />,
-		showInHeader: true,
-		component: Loadable({ loader: () => import('./pages/home/Home'), loading: RouterLoading }),
-	},
-	{
-		path: '/about',
-		name: 'About',
-		icon: <Drafts />,
-		showInHeader: true,
-		component: Loadable({ loader: () => import('./pages/about/About'), loading: RouterLoading }),
-	},
+	{ path: '/home', name: 'Home', icon: <Inbox />, showInHeader: true, component: loadablePage(() => import('./pages/home/Home')) },
+	{ path: '/about', name: 'About', icon: <Drafts />, showInHeader: true, component: loadablePage(() => import('./pages/about/About')) },
 	{
 		path: '/topic',
 		name: 'Topic',
 		icon: <AccessTimeSharp />,
 		showInHeader: true,
-		component: Loadable({ loader: () => import('./pages/topic/Topic'), loading: RouterLoading }),
+		component: loadablePage(() => import('./pages/topic/Topic')),
 	},
 	{
-		path: '/loading',
-		name: 'Loading',
-		component: RouterLoading,
+		path: '/components',
+		name: 'Components',
+		icon: <AccessTimeSharp />,
+		showInHeader: true,
+		component: loadablePage(() => import('./pages/components/Components')),
 	},
+	{ path: '/loading', name: 'Loading', component: RouterLoading },
 ];
 
 const App = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [state, dispatch] = useContext(ReducerContext);
-	const intl = useIntl();
+	const { locale } = useIntl();
+	const history = useHistory();
 
 	/* default systme color mode */
 	const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'));
@@ -69,23 +58,25 @@ const App = () => {
 		dispatch({ type: LOAD_SNACK_BAR, enqueueSnackbar, closeSnackbar });
 	}, [enqueueSnackbar, closeSnackbar]);
 
+	const headerFooterConfig = {
+		title: 'React Demo',
+		logo: <img alt="" className="app__icon" src={ReactIcon} onClick={() => history.push(`/${locale}/home`)} />,
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<div className="app">
-				<Header
-					title="React Demo"
-					logo={<img alt="" className="app__icon" src={ReactIcon} />}
-					pages={pages}
-					darkMode={darkMode}
-					setDarkMode={setDarkMode}
-				/>
-				<Switch>
-					{pages.map((page, index) => (
-						<Route key={index.toString()} path={`/${intl.locale}${page.path}`} component={page.component} />
-					))}
-					<Redirect to={`/${intl.locale}${pages[0].path}`} />
-				</Switch>
+				<Header {...headerFooterConfig} pages={pages} darkMode={darkMode} setDarkMode={setDarkMode} />
+				<div className="app__body">
+					<Switch>
+						{pages.map((page, index) => (
+							<Route key={index.toString()} path={`/${locale}${page.path}`} component={page.component} />
+						))}
+						<Redirect to={`/${locale}${pages[0].path}`} />
+					</Switch>
+				</div>
+				<Footer {...headerFooterConfig} />
 			</div>
 		</ThemeProvider>
 	);
