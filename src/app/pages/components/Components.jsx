@@ -1,17 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
-import { DataGrid } from '@material-ui/data-grid';
 import VerticalAlignTopIcon from '@material-ui/icons/VerticalAlignTop';
+import { useDispatch } from 'react-redux';
 import { openNotify } from '../../utils/notification';
-import { ReducerContext } from '../../../IndexProvider';
 import Checkbox from '../../common/components/checkbox/Checkbox';
 import Radio from '../../common/components/radio/Radio';
 import Select from '../../common/components/select/Select';
 import BackTop from '../../common/components/backTop/BackTop';
 import Empty from '../../common/components/empty/Empty';
+import Table from '../../common/components/table/Table';
+
 import Autocomplete from '../../common/components/autocomplete/Autocomplete';
 import Spin from '../../common/components/spin/Spin';
-
 import autocompleteOptions from './data/autocompleteData.json';
 import radioOptions from './data/radioData.json';
 
@@ -23,7 +23,7 @@ const columns = [
 	{ field: 'demo', headerName: 'Demo', width: 600, renderCell: params => params.getValue('demo') },
 ];
 
-const finishRows = ({ loading, setLoading, dispatch }) => [
+const finishData = ({ loading, setLoading, dispatch }) => [
 	{ component: 'Checkbox', demo: <Checkbox checked>Apple</Checkbox> },
 	{
 		component: 'Button',
@@ -102,38 +102,23 @@ const finishRows = ({ loading, setLoading, dispatch }) => [
 ];
 
 /* 尚未轉換的元件 */
-const todoRows = [];
+const todoData = [];
 
 const Components = () => {
 	const [loading, setLoading] = useState(false);
-	// eslint-disable-next-line no-unused-vars
-	const [state, dispatch] = useContext(ReducerContext);
-
+	const dispatch = useDispatch();
 	return (
 		<div className="components">
 			<div className="components__title">目前已完成元件</div>
-			<div className="components__table">
-				<DataGrid
-					autoHeight
-					rowHeight={150}
-					rows={finishRows({ loading, setLoading, dispatch }).map((row, i) => ({ ...row, id: i + 1 }))}
-					columns={columns}
-					pageSize={5}
-					checkboxSelection
-					selectionModel={finishRows({ loading, setLoading }).map((row, i) => i + 1)}
-				/>
-			</div>
+			<Table
+				className="components__table"
+				columns={columns}
+				data={finishData({ loading, setLoading, dispatch }).map((row, i) => ({ ...row, id: i + 1 }))}
+			/>
+
 			<div className="components__title">尚未完成的元件</div>
-			<div className="components__table2">
-				<DataGrid
-					autoHeight
-					rowHeight={80}
-					rows={todoRows.map((row, i) => ({ ...row, id: i + 1 }))}
-					columns={columns}
-					pageSize={5}
-					checkboxSelection
-				/>
-			</div>
+			<Table className="components__table" data={todoData.map((row, i) => ({ ...row, id: i + 1 }))} columns={columns} />
+
 			<BackTop>
 				<VerticalAlignTopIcon />
 			</BackTop>
