@@ -1,5 +1,5 @@
-import React, { useContext, useMemo, useState, useEffect } from 'react';
-import { hot } from 'react-hot-loader/root';
+import React, { useMemo, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,7 +11,6 @@ import Loadable from 'react-loadable';
 import { useSnackbar } from 'notistack';
 import { AccessTimeSharp, Inbox, Drafts } from '@material-ui/icons';
 import { antTheme } from './utils/antTheme';
-import { ReducerContext } from '../IndexProvider';
 import Header from './common/header/Header';
 import Footer from './common/footer/Footer';
 import RouterLoading from './common/loading/Loading';
@@ -44,7 +43,7 @@ const pages = [
 
 const App = () => {
 	// eslint-disable-next-line no-unused-vars
-	const [state, dispatch] = useContext(ReducerContext);
+	const dispatch = useDispatch();
 	const { locale } = useIntl();
 	const history = useHistory();
 
@@ -82,4 +81,4 @@ const App = () => {
 	);
 };
 
-export default hot(App);
+export default App;

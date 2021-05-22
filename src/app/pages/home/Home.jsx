@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
-import { ReducerContext } from '../../../IndexProvider';
 import { SHOW_SNACK_BAR } from '../../appAction';
 import { countUp, countDown } from './homeAction';
 import services from '../../config/services';
@@ -11,8 +11,8 @@ import services from '../../config/services';
 import './home.scss';
 
 const Home = () => {
-	const [state, dispatch] = useContext(ReducerContext);
-	const { count } = state.home;
+	const dispatch = useDispatch();
+	const { count } = useSelector(state => state.home);
 	const { formatMessage } = useIntl();
 
 	const [active, setActive] = useState(false);

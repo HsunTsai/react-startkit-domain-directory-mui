@@ -1,23 +1,18 @@
-import React, { useEffect, useState, createContext, useReducer } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect, useState } from 'react';
 import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import axios from 'axios';
 import services from './app/config/services';
 import Loading from './app/common/loading/Loading';
 import { changeLang, supportLanguages } from './app/utils/languageTools';
 
 // 將 combineReducer 後的 Reducer import
-import reducers from './indexReducerRoot';
+import rootReducer from './combineReducer';
 
-// 建立一個 context component ，並匯出給子 component 使用
-const ReducerContext = createContext();
-export { ReducerContext };
-
-/* 
- 呼叫 combineReducer 後的 reducers ，
- 利用如果沒傳任何 action 就回傳目前的 state 來取得初始資料
-*/
-const initState = reducers();
+const store = createStore(rootReducer /* preloadedState, */, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const IndexProvider = ({ match, history, children }) => {
 	const [i18n, setI18n] = useState();
@@ -25,8 +20,6 @@ const IndexProvider = ({ match, history, children }) => {
 		params: { locale },
 	} = match;
 
-	// 使用 useReducer 將創建後的 state 及 dispatch 放進 reducer
-	const reducer = useReducer(reducers, initState);
 	useEffect(() => {
 		/* 檢查 語系最常不會超過9字元 => https://github.com/ladjs/i18n-locales
 		 * 檢查 本系統是否支援該語系 */
@@ -45,11 +38,11 @@ const IndexProvider = ({ match, history, children }) => {
 	}, [locale]);
 
 	return i18n ? (
-		<ReducerContext.Provider value={reducer}>
+		<Provider store={store}>
 			<IntlProvider locale={i18n.locale} messages={i18n.messages}>
 				{children}
 			</IntlProvider>
-		</ReducerContext.Provider>
+		</Provider>
 	) : (
 		<Loading />
 	);
