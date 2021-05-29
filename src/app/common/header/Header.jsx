@@ -18,7 +18,7 @@ const Header = ({ title, logo, pages, darkMode, setDarkMode }) => {
 		params: { locale },
 	} = useRouteMatch();
 
-	const handleScroll = useRef(debounce(() => setHideHeader(window.scrollY > 100), 50)).current;
+	const handleScroll = useRef(debounce(() => setHideHeader(window.scrollY > 100), 10)).current;
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll);
