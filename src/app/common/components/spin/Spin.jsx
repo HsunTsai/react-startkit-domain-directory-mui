@@ -15,7 +15,7 @@ const CustomSpin = props => {
 					<CircularProgress />
 				</div>
 			</Fade>
-			<div className="customSpin__main">{children}</div>
+			{children}
 		</div>
 	);
 };
