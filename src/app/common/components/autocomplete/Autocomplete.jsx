@@ -47,7 +47,7 @@ const CustomAutocomplete = props => {
 				}}
 				getOptionLabel={option => (option && option.label) || ''}
 				renderInput={params =>
-					renderInput || (
+					(renderInput && renderInput(params)) || (
 						<TextField
 							{...params}
 							variant="outlined"
